@@ -14,7 +14,9 @@
     <div class="card shadow-sm">
         <div class="card-body">
             <form action="{{ route('game.servers.admin.nodes.update', ['server' => $server->id, 'node' => $node->id]) }}" method="POST">
+                @method('PUT')
                 @csrf
+
 
                 <div class="mb-3">
                     <label class="form-label fw-bold">Nom du Nœud :</label>
@@ -33,7 +35,7 @@
 
                 <div class="mb-3">
                     <label class="form-label fw-bold">Position :</label>
-                    <input type="number" name="position" value="{{ old('position', $node->position) }}" class="form-control" required>
+                    <input type="text" name="position" value="{{ old('position', $node->position) }}" class="form-control" required>
                 </div>
 
                 <button type="submit" class="btn btn-success">

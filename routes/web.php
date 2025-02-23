@@ -5,6 +5,7 @@ use App\Http\Controllers\Server\Admin\ServerAdminMediaController;
 use App\Http\Controllers\Server\Admin\ServerAdminNodeController;
 use App\Http\Controllers\Server\Admin\ServerAdminRessourceController;
 use App\Http\Controllers\Server\Admin\ServerAdminTranslationController;
+use App\Http\Controllers\Server\Admin\ServerAdminUserController;
 use App\Http\Controllers\Server\ServerController;
 use Illuminate\Support\Facades\Route;
 
@@ -105,6 +106,21 @@ Route::group([
             ], function() {
                 Route::get('edit', [ServerAdminNodeController::class, 'edit'])->name('edit');
                 Route::put('update', [ServerAdminNodeController::class, 'update'])->name('update');
+            });
+        });
+
+        Route::group([
+            'prefix' => 'users',
+            'as' => 'users.',
+        ], function() {
+            Route::get('/', [ServerAdminUserController::class, 'list'])->name('list');
+            Route::get('create', [ServerAdminUserController::class, 'create'])->name('create');
+            Route::post('store', [ServerAdminUserController::class, 'store'])->name('store');
+            Route::group([
+                'prefix' => '{user}',
+            ], function() {
+                Route::get('edit', [ServerAdminUserController::class, 'edit'])->name('edit');
+                Route::put('update', [ServerAdminUserController::class, 'update'])->name('update');
             });
         });
 

@@ -11,6 +11,7 @@ use App\Services\ServerNodeService;
 use App\Services\ServerRessourceService;
 use App\Services\ServerService;
 use App\Services\ServerTranslationService;
+use App\Services\ServerUserService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -40,6 +41,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->singleton(ServerNodeService::class, function ($app) {
             return new ServerNodeService();
+        });
+        $this->app->singleton(ServerUserService::class, function ($app) {
+            return new ServerUserService();
         });
 
     }

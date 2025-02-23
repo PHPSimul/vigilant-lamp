@@ -33,4 +33,9 @@ class Server extends Model
     {
         return $this->hasMany(ServerNode::class);
     }
+
+    public function serverUsers()
+    {
+        return $this->hasMany(ServerUser::class);
+    }
 }

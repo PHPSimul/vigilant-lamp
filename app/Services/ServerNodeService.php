@@ -51,7 +51,7 @@ class ServerNodeService
                     }
                 }
                 else if ($spawn_generation == 'center') {
-                    
+                    return $x_center->value . '|' . $y_center->value;
                 }
             }
             else if ($map_type->value == '3D') {
@@ -69,6 +69,7 @@ class ServerNodeService
                 }
             }
         }
+        return '0|0';
     }
 
     public function createNode(Server $server, ?Model $owner): ServerNode
