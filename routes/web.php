@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Server\Admin\ServerAdminConfigurationController;
 use App\Http\Controllers\Server\Admin\ServerAdminMediaController;
+use App\Http\Controllers\Server\Admin\ServerAdminNodeController;
 use App\Http\Controllers\Server\Admin\ServerAdminRessourceController;
 use App\Http\Controllers\Server\Admin\ServerAdminTranslationController;
+use App\Http\Controllers\Server\Admin\ServerAdminUserController;
 use App\Http\Controllers\Server\ServerController;
 use Illuminate\Support\Facades\Route;
 
@@ -88,6 +90,37 @@ Route::group([
             ], function() {
                 Route::get('edit', [ServerAdminMediaController::class, 'edit'])->name('edit');
                 Route::put('update', [ServerAdminMediaController::class, 'update'])->name('update');
+            });
+        });
+
+        
+        Route::group([
+            'prefix' => 'nodes',
+            'as' => 'nodes.',
+        ], function() {
+            Route::get('/', [ServerAdminNodeController::class, 'list'])->name('list');
+            Route::get('create', [ServerAdminNodeController::class, 'create'])->name('create');
+            Route::post('store', [ServerAdminNodeController::class, 'store'])->name('store');
+            Route::group([
+                'prefix' => '{node}',
+            ], function() {
+                Route::get('edit', [ServerAdminNodeController::class, 'edit'])->name('edit');
+                Route::put('update', [ServerAdminNodeController::class, 'update'])->name('update');
+            });
+        });
+
+        Route::group([
+            'prefix' => 'users',
+            'as' => 'users.',
+        ], function() {
+            Route::get('/', [ServerAdminUserController::class, 'list'])->name('list');
+            Route::get('create', [ServerAdminUserController::class, 'create'])->name('create');
+            Route::post('store', [ServerAdminUserController::class, 'store'])->name('store');
+            Route::group([
+                'prefix' => '{user}',
+            ], function() {
+                Route::get('edit', [ServerAdminUserController::class, 'edit'])->name('edit');
+                Route::put('update', [ServerAdminUserController::class, 'update'])->name('update');
             });
         });
 

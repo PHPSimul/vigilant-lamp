@@ -117,6 +117,17 @@ class ServerService
         $configurations = [
             'game_speed' => 1,
             'build_speed' => 1,
+            'map_size' => 100,
+            'map_type' => '2D', // 2D ou 3D
+            'x_center' => 50,
+            'y_center' => 50,
+            'x_min' => 0,
+            'y_min' => 0,
+            'x_max' => 100,
+            'y_max' => 100,
+            'z_min' => 0,
+            'z_max' => 0,
+            'spawn_generation' => 'random', // random 
         ];
 
         foreach ($configurations as $key => $value) {

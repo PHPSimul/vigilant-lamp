@@ -71,6 +71,30 @@
                         </ul>
                     </li>
 
+                    <!-- MENU DÉROULANT "Media" -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="nodesDropdown" role="button" data-bs-toggle="dropdown">
+                            🏘️​ Node
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('game.servers.admin.nodes.list', ['server' => $server->id]) }}">📖 Liste des nodes</a></li>
+                            <li><a class="dropdown-item" href="{{ route('game.servers.admin.nodes.create', ['server' => $server->id]) }}">➕ Ajouter une node</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- MENU DÉROULANT "Media" -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="usersDropdown" role="button" data-bs-toggle="dropdown">
+                            👥 Utilisateurs
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('game.servers.admin.users.list', ['server' => $server->id]) }}">📖 Liste des Utilisateurs</a></li>
+                            <li><a class="dropdown-item" href="{{ route('game.servers.admin.users.create', ['server' => $server->id]) }}">➕ Ajouter un Utilisateur</a></li>
+                        </ul>
+                    </li>
+
+                    
+
                     
                 </ul>
 
