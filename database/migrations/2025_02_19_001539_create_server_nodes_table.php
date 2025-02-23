@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('server_nodes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('server_id');
+            $table->string('name');
+            $table->nullableMorphs('owner');
+            $table->string('position')->nullable();
             $table->timestamps();
+            $table->foreign('server_id')->references('id')->on('servers')->onDelete('cascade');
         });
     }
 

@@ -71,6 +71,19 @@
                         </ul>
                     </li>
 
+                    <!-- MENU DÉROULANT "Media" -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="nodesDropdown" role="button" data-bs-toggle="dropdown">
+                            🏘️​ Node
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('game.servers.admin.nodes.list', ['server' => $server->id]) }}">📖 Liste des nodes</a></li>
+                            <li><a class="dropdown-item" href="{{ route('game.servers.admin.nodes.create', ['server' => $server->id]) }}">➕ Ajouter une node</a></li>
+                        </ul>
+                    </li>
+
+                    
+
                     
                 </ul>
 
