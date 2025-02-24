@@ -127,7 +127,7 @@ class ServerNodeService
                 'content' => json_encode($content),
             ]);
         } else {
-            dd($exist);
+            throw new Exception('L\'entité existe déjà.');
         }
     }
 
