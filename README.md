@@ -1,66 +1,133 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PHPSimul avec Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**PHPSimul** est un projet qui a vu le jour en 2006 sous forme d'un script PHP/SQL créé par une équipe de développeurs amateurs, menée par Sébastien CAPARROS. Ce projet permettait de créer un **jeu par navigateur**, à l'instar de jeux populaires comme OGame, Les Royaumes Renaissants ou Travian. Sa grande particularité résidait dans sa flexibilité, permettant une personnalisation totale : création de races, technologies et univers uniques.
 
-## About Laravel
+PHPSimul a laissé une empreinte avec sa version **1.3**, mais cette dernière est tombée en désuétude avec des failles de sécurité et de nombreuses imperfections. Aujourd'hui, ce projet renaît sous un nouveau jour grâce à l'intégration du **framework Laravel**, offrant ainsi une architecture moderne et robuste pour les futurs développements.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## À propos de PHPSimul 1.3
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Description
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+La version 1.3 de PHPSimul comprenait :
 
-## Learning Laravel
+- Un **panneau d'administration** pour gérer l'ensemble du jeu.
+- Un **forum**, un **chat**, et un **livre d'or**.
+- Des **technologies** et des **races** entièrement personnalisables.
+- Une grande flexibilité permettant de concevoir des jeux sur mesure, adaptés à des thématiques variées (aliens, schtroumpfs, etc.).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Malheureusement, PHPSimul 1.3 s'est arrêté après cette version, mais il reste disponible pour les curieux, avec des fichiers à télécharger sur le dépôt GitHub de PHPSimul. Soyez toutefois prudent en l'installant, car il contient des failles de sécurité et doit être exécuté localement via des outils comme Wampserver ou EasyPHP.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Télécharger PHPSimul 1.3
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Vous pouvez télécharger PHPSimul 1.3 à partir des liens suivants :
+- **GitHub** : [GitHub](https://github.com/AlexisAmand/PHPSimul)
+- **Version zippée** : [Télécharger PHPSimul 1.3](https://github.com/boitasite/phpsimul-1-3)
+- **Version dézippée** : Accessible dans le dossier "phpsimul-1-3" du dépôt GitHub.
 
-## Laravel Sponsors
+> **Avertissement** : Pour faire fonctionner PHPSimul 1.3, il est nécessaire de supprimer 3 fichiers : `backup_v1.3.sql`, `backup_v1.3.php` et `systeme/config.php`.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+PHPSimul est **Open Source**, donc gratuit et modifiable. Vous êtes libre de l’adapter selon vos besoins.
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+## Refactorisation avec Laravel
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Cette version refactorisée de PHPSimul utilise le **framework Laravel** pour moderniser l'architecture et offrir une meilleure évolutivité et sécurité. Laravel facilite la gestion des routes, des bases de données et des tâches récurrentes grâce à son ORM Eloquent et à ses outils intégrés.
 
-## Code of Conduct
+### Fonctionnalités de la version Laravel :
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **Architecture MVC** : Utilisation du modèle **Modèle-Vue-Contrôleur** pour séparer clairement la logique de l'application.
+- **Sécurité améliorée** : Avec la gestion des utilisateurs et des permissions via Laravel.
+- **Gestion simplifiée de la base de données** : Grâce à Laravel Migrations et Eloquent ORM.
+- **Interface moderne** : Intégration de technologies modernes comme Vue.js ou Tailwind CSS pour l'interface utilisateur (en fonction de l'implémentation).
+- **API RESTful** : Exposition d'API pour interagir avec l'application à distance.
 
-## Security Vulnerabilities
+## Prérequis
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Avant de commencer, vous devez avoir installé les outils suivants :
 
-## License
+- **PHP** (version 8.x ou supérieure)
+- **Composer** (gestionnaire de dépendances PHP)
+- **MySQL** ou **MariaDB** (ou toute autre base de données compatible avec Laravel)
+- **Node.js** et **NPM** pour la gestion des dépendances front-end (si applicable)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Installation
+
+### Cloner le dépôt
+
+```bash
+git clone https://github.com/boitasite/phpsimul-laravel.git
+cd phpsimul-laravel
+```
+
+### Installer les dépendances
+
+```bash
+composer install
+npm install
+```
+
+### Configuration de l'environnement
+
+Copiez le fichier `.env.example` en `.env` et configurez-le selon votre environnement local :
+
+```bash
+cp .env.example .env
+```
+
+Ensuite, modifiez les paramètres de connexion à la base de données et autres configurations dans le fichier `.env`.
+
+### Générer la clé d'application
+
+```bash
+php artisan key:generate
+```
+
+### Migration de la base de données
+
+```bash
+php artisan migrate
+```
+
+### Lancer l'application
+
+Pour démarrer le serveur local :
+
+```bash
+php artisan serve
+```
+
+Vous pouvez maintenant accéder à l'application à l'adresse [http://127.0.0.1:8000](http://127.0.0.1:8000).
+
+## Structure du projet
+
+La structure des répertoires dans cette version Laravel :
+
+```
+/phpsimul-laravel
+├── /app                # Logique de l'application (modèles, contrôleurs, etc.)
+├── /config             # Configuration de l'application
+├── /database           # Migrations et seeders
+├── /resources          # Vues, fichiers front-end
+├── /routes             # Définition des routes
+├── /storage            # Stockage des fichiers, logs, etc.
+└── /tests              # Tests unitaires et fonctionnels
+```
+
+## Contribuer
+
+Ce projet est ouvert à la contribution ! Si vous souhaitez participer, suivez ces étapes :
+
+1. Forkez le dépôt.
+2. Créez une branche pour vos modifications : `git checkout -b ma-fonctionnalité`.
+3. Committez vos modifications avec un message clair.
+4. Pushez la branche et soumettez une pull request.
+
+## Licence
+
+Distribué sous la licence MIT. Voir `LICENSE` pour plus de détails.
+
+---
+
+Ainsi, ce `README.md` donne un aperçu complet de PHPSimul, tout en détaillant la refactorisation en Laravel. Cela permet aux utilisateurs de comprendre l’histoire du projet tout en ayant une vue d’ensemble de la version moderne.
