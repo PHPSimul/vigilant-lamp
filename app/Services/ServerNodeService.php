@@ -115,6 +115,22 @@ class ServerNodeService
         }
     }
 
+    public function createNodeEntityModel(ServerNode $node, Model $model, string $content) {
+        if ($node->server_id !== $model->server_id)
+            throw new Exception('Le modèle n\'appartient pas au serveur.');
+        $exist = ServerNodeEntity::where('server_node_id', $node->id)->where('entity_id', $model->id)->where('entity_type', get_class($model))->first();
+        if (!$exist) {
+            ServerNodeEntity::create([
+                'server_node_id' => $node->id,
+                'entity_id' => $model->id,
+                'entity_type' => get_class($model),
+                'content' => json_encode($content),
+            ]);
+        } else {
+            dd($exist);
+        }
+    }
+
     public function createNodeEntity(ServerNode $node, Server $server) {
         $this->createNodeEntityRessources($node, $server);
     }
