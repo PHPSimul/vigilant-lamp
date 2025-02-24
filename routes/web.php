@@ -104,8 +104,17 @@ Route::group([
             Route::group([
                 'prefix' => '{node}',
             ], function() {
+                Route::get('view', [ServerAdminNodeController::class, 'view'])->name('view');
                 Route::get('edit', [ServerAdminNodeController::class, 'edit'])->name('edit');
                 Route::put('update', [ServerAdminNodeController::class, 'update'])->name('update');
+                Route::get('entities/create', [ServerAdminNodeController::class, 'createEntity'])->name('entities.create');
+                Route::post('entities/store', [ServerAdminNodeController::class, 'storeEntity'])->name('entities.store');
+                Route::group([
+                    'prefix' => 'entities/{entity}',
+                ], function() {
+                    Route::get('edit', [ServerAdminNodeController::class, 'editEntity'])->name('entities.edit');
+                    Route::put('update', [ServerAdminNodeController::class, 'updateEntity'])->name('entities.update');
+                });
             });
         });
 

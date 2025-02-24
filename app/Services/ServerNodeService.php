@@ -7,7 +7,10 @@ namespace App\Services;
 use App\Models\Server;
 use App\Models\ServerConfiguration;
 use App\Models\ServerNode;
+use App\Models\ServerNodeEntity;
+use App\Models\ServerRessource;
 use App\Models\ServerTranslation;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 class ServerNodeService
@@ -39,7 +42,8 @@ class ServerNodeService
         $spawn_generation = $collection->where('key', 'spawn_generation')->first();
         if ($map_type != null) {
             if ($map_type->value == '2D') {
-                if ($spawn_generation == 'random') {
+                if ($spawn_generation->value == 'random') {
+
                     while (true) {
                         $x = rand($x_min->value, $x_max->value);
                         $y = rand($y_min->value, $y_max->value);
@@ -50,12 +54,12 @@ class ServerNodeService
                         }
                     }
                 }
-                else if ($spawn_generation == 'center') {
+                else if ($spawn_generation->value == 'center') {
                     return $x_center->value . '|' . $y_center->value;
                 }
             }
             else if ($map_type->value == '3D') {
-                if ($spawn_generation == 'random') {
+                if ($spawn_generation->value == 'random') {
                     while (true) {
                         $x = rand($x_min->value, $x_max->value);
                         $y = rand($y_min->value, $y_max->value);
@@ -79,13 +83,56 @@ class ServerNodeService
         if ($serverConfigurationNodeName) {
             $name = $serverConfigurationNodeName->value;
         }
-        return ServerNode::create([
+        $node = ServerNode::create([
             'server_id' => $server->id,
             'name' => $name,
             'position' => $this->generatePosition($server),
             'owner_id' => $owner ? $owner->id : null,
             'owner_type' => $owner ? get_class($owner) : null,
         ]);
+        $this->createNodeEntity($node, $server);
+
+        return $node;
+    }
+
+    public function createNodeEntityRessources(ServerNode $node, Server $server) {
+        if ($server->id !== $node->server_id)
+            throw new Exception('Le noeud n\'appartient pas au serveur.');
+        if ($server->serverRessources->count() === 0)
+            throw new Exception('Aucune ressource n\'est disponible pour le serveur.');
+        foreach ($server->serverRessources as $ressource) {
+            $exist = ServerNodeEntity::where('server_node_id', $node->id)->where('entity_id', $ressource->id)->where('entity_type', ServerRessource::class)->first();
+            if (!$exist) {
+                ServerNodeEntity::create([
+                    'server_node_id' => $node->id,
+                    'entity_id' => $ressource->id,
+                    'entity_type' => ServerRessource::class,
+                    'content' => json_encode([
+                        'quantity' => 0,
+                    ]),
+                ]);
+            }
+        }
+    }
+
+    public function createNodeEntityModel(ServerNode $node, Model $model, string $content) {
+        if ($node->server_id !== $model->server_id)
+            throw new Exception('Le modèle n\'appartient pas au serveur.');
+        $exist = ServerNodeEntity::where('server_node_id', $node->id)->where('entity_id', $model->id)->where('entity_type', get_class($model))->first();
+        if (!$exist) {
+            ServerNodeEntity::create([
+                'server_node_id' => $node->id,
+                'entity_id' => $model->id,
+                'entity_type' => get_class($model),
+                'content' => json_encode($content),
+            ]);
+        } else {
+            throw new Exception('L\'entité existe déjà.');
+        }
+    }
+
+    public function createNodeEntity(ServerNode $node, Server $server) {
+        $this->createNodeEntityRessources($node, $server);
     }
 
     public function renameNode(ServerNode $node, string $name): ServerNode
