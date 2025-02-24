@@ -127,7 +127,3 @@ Ce projet est ouvert à la contribution ! Si vous souhaitez participer, suivez c
 ## Licence
 
 Distribué sous la licence MIT. Voir `LICENSE` pour plus de détails.
-
----
-
-Ainsi, ce `README.md` donne un aperçu complet de PHPSimul, tout en détaillant la refactorisation en Laravel. Cela permet aux utilisateurs de comprendre l’histoire du projet tout en ayant une vue d’ensemble de la version moderne.
