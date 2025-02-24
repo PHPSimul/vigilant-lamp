@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Server\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Server;
 use App\Models\ServerNode;
+use App\Models\ServerNodeEntity;
 use App\Models\ServerRessource;
 use App\Models\ServerUser;
 use App\Services\ServerNodeService;
@@ -190,6 +191,35 @@ class ServerAdminNodeController extends Controller
         }
 
         $this->serverNodeService->createNodeEntityModel($node, $entity, $request->content);
+    }
+
+    public function editEntity(Server $server, ServerNode $node, ServerNodeEntity $entity)
+    {
+        return view('servers.admin.nodes.entity.edit', [
+            'server' => $server,
+            'node' => $node,
+            'entity' => $entity,
+        ]);
+    }
+
+    public function updateEntity(Request $request, Server $server, ServerNode $node, ServerNodeEntity $entity)
+    {
+        $request->validate([
+            'content' => 'required|string|json',
+        ]);
+    
+        $decodedContent = json_decode($request->content, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return back()->withErrors(['content' => 'Invalid JSON provided.']);
+        }
+    
+        $entity->content = $request->content;
+        $entity->save();
+
+        return redirect()->route('game.servers.admin.nodes.view', [
+            'server' => $server,
+            'node' => $node,
+        ]);
     }
 }
 

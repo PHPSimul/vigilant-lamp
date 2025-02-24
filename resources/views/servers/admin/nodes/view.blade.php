@@ -58,7 +58,7 @@
                     <ul class="list-group">
                         @foreach($entities as $entity)
                             <li class="list-group-item">
-                                <p><strong>ID de l'Entité :</strong> {{ $entity->entity_id }}</p>
+                                <p><strong>ID de l'Entité :</strong> {{ $entity->entity_id }} <a href="{{route('game.servers.admin.nodes.entities.edit', ['server' => $server->id, 'node' => $node->id, 'entity' => $entity->id])}}"  class="btn btn-sm btn-warning float-end"> Editer l'entité </a> </p>
                                 <p><strong>Contenu :</strong> {{ $entity->content }}</p>
                             </li>
                         @endforeach
