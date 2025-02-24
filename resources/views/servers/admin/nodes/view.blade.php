@@ -20,28 +20,6 @@
         </div>
     </div>
 
-    {{-- <!-- Liste des entités associées -->
-    <div class="card">
-        <div class="card-header bg-secondary text-white">
-            Entités liées au Nœud
-        </div>
-        <div class="card-body">
-            @if($node->entities->isEmpty())
-                <p>Aucune entité associée pour le moment.</p>
-            @else
-                <ul class="list-group">
-                    @foreach($node->entities as $entity)
-                        <li class="list-group-item">
-                            <p><strong>Type d'Entité :</strong> {{ class_basename($entity->entity_type) }}</p>
-                            <p><strong>ID de l'Entité :</strong> {{ $entity->entity_id }}</p>
-                            <p><strong>Contenu :</strong> {{ $entity->content }}</p>
-                        </li>
-                    @endforeach
-                </ul>
-            @endif
-        </div>
-    </div> --}}
-
     <!-- Liste des entités groupées par type -->
     <div class="card">
         <div class="card-header bg-secondary text-white">
