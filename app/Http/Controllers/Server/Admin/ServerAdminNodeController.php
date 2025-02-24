@@ -136,6 +136,22 @@ class ServerAdminNodeController extends Controller
             'server' => $server,
         ]);
     }
+
+    public function view(Server $server, ServerNode $node)
+    {
+        return view('servers.admin.nodes.view', [
+            'server' => $server,
+            'node' => $node,
+        ]);
+    }
+
+    public function createEntity(Server $server, ServerNode $node)
+    {
+        return view('servers.admin.nodes.entity.create', [
+            'server' => $server,
+            'node' => $node,
+        ]);
+    }
 }
 
 ?>

@@ -17,4 +17,9 @@ class ServerNode extends Model
     {
         return $this->morphTo();
     }
+
+    public function entities()
+    {
+        return $this->hasMany(ServerNodeEntity::class);
+    }
 }

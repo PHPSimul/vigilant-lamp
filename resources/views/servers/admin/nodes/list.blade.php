@@ -33,6 +33,9 @@
                     <td>{{ $node->owner_id ?? 'N/A' }}</td>
                     <td>{{ $node->position }}</td>
                     <td class="text-center">
+                        <a href="{{ route('game.servers.admin.nodes.view', ['server' => $server->id, 'node' => $node->id]) }}" class="btn btn-info btn-sm">
+                            📄 Détails
+                        </a>
                         <a href="{{ route('game.servers.admin.nodes.edit', ['server' => $server->id, 'node' => $node->id]) }}" class="btn btn-warning btn-sm">
                             ✏️ Modifier
                         </a>
