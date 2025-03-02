@@ -39,15 +39,15 @@ class ServerService
 
     /**
      * Crée les ressources par défaut pour le serveur.
-     * 
+     *
      */
     public function createServerDefaultRessources(Server $server, bool $zen = false) {
         $ressources = [
-            'wood', 'stone', 'iron', 'gold'
+            'stone', 'wood', 'iron'
         ];
         if ($zen)
             $ressources = [
-                'coal', 'quartz', 'cooper', 'iron', 'gold', 'diamond', 'emerald', 'netherite'
+                'stone', 'wood', 'food', 'coal', 'quartz', 'cooper', 'iron', 'gold', 'diamond', 'emerald', 'netherite'
             ];
 
         foreach ($ressources as $ressource) {
@@ -127,7 +127,7 @@ class ServerService
             'y_max' => 100,
             'z_min' => 0,
             'z_max' => 0,
-            'spawn_generation' => 'random', // random 
+            'spawn_generation' => 'random', // random
         ];
 
         foreach ($configurations as $key => $value) {

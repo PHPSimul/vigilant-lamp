@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Server;
 use App\Models\ServerTranslation;
 use App\Observers\ServerObserver;
+use App\Services\ServerBuildingService;
 use App\Services\ServerConfigurationService;
 use App\Services\ServerMediaService;
 use App\Services\ServerNodeService;
@@ -24,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         // Enregistrer les services
+        
         $this->app->singleton(ServerService::class, function ($app) {
             return new ServerService();
         });
@@ -44,6 +46,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->singleton(ServerUserService::class, function ($app) {
             return new ServerUserService();
+        });
+        $this->app->singleton(ServerBuildingService::class, function ($app) {
+            return new ServerBuildingService();
         });
 
     }

@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin Panel</title>
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
-    
+
     <!-- Optionnel: icônes (font-awesome ou autre) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -71,7 +71,7 @@
                         </ul>
                     </li>
 
-                    <!-- MENU DÉROULANT "Media" -->
+                    <!-- MENU DÉROULANT "Nodes" -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="nodesDropdown" role="button" data-bs-toggle="dropdown">
                             🏘️​ Node
@@ -82,7 +82,7 @@
                         </ul>
                     </li>
 
-                    <!-- MENU DÉROULANT "Media" -->
+                    <!-- MENU DÉROULANT "Utilisateurs" -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="usersDropdown" role="button" data-bs-toggle="dropdown">
                             👥 Utilisateurs
@@ -93,9 +93,22 @@
                         </ul>
                     </li>
 
-                    
+                    <!-- MENU DÉROULANT "Buildings" -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="buildingsDropdown" role="button" data-bs-toggle="dropdown">
+                            🏰 Buildings
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('game.servers.admin.buildings.list', ['server' => $server->id]) }}">📖 Liste des bâtiments</a></li>
+                            <li><a class="dropdown-item" href="{{ route('game.servers.admin.buildings.create', ['server' => $server->id]) }}">➕ Ajouter un bâtiment</a></li>
+                        </ul>
+                    </li>
 
-                    
+
+
+
+
+
                 </ul>
 
                 <!-- Bouton de changement de thème -->

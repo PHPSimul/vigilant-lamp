@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('server_buildings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('server_id');
+            $table->unsignedBigInteger('media_id')->nullable();
             $table->string('name');
             $table->string('description');
             $table->integer('default_level');
             $table->integer('max_level');
             $table->integer('min_level');
             $table->foreign('server_id')->references('id')->on('servers')->onDelete('cascade');
+            $table->foreign('media_id')->references('id')->on('server_media')->onDelete('cascade');
             $table->timestamps();
 
         });
