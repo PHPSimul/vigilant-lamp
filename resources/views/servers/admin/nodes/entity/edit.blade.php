@@ -16,6 +16,7 @@
                     <label for="entity_type" class="form-label">Type d'Entité</label>
                     <select id="entity_type" name="entity_type" class="form-select" required>
                         <option value="App\Models\ServerRessource" {{ $entity->entity_type == 'App\Models\ServerRessource' ? 'selected' : '' }}>ServerRessource</option>
+                        <option value="App\Models\ServerBuilding" {{ $entity->entity_type == 'App\Models\ServerBuilding' ? 'selected' : '' }}>ServerBuilding</option>
                     </select>
                 </div>
 

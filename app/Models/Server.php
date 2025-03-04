@@ -38,4 +38,9 @@ class Server extends Model
     {
         return $this->hasMany(ServerUser::class);
     }
+
+    public function serverBuildings()
+    {
+        return $this->hasMany(ServerBuilding::class);
+    }
 }

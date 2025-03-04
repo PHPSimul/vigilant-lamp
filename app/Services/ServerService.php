@@ -12,11 +12,11 @@ use App\Models\ServerRessource;
 use App\Models\ServerTranslation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class ServerService
 {
-
     public function createServerRessource(Server $server, string $ressource, ?ServerMedia $media): ServerRessource
     {
         if ($media == null) {
@@ -39,19 +39,22 @@ class ServerService
 
     /**
      * Crée les ressources par défaut pour le serveur.
-     * 
+     *
      */
     public function createServerDefaultRessources(Server $server, bool $zen = false) {
         $ressources = [
-            'wood', 'stone', 'iron', 'gold'
+            'stone', 'wood', 'iron'
         ];
-        if ($zen)
+        if ($zen) {
             $ressources = [
-                'coal', 'quartz', 'cooper', 'iron', 'gold', 'diamond', 'emerald', 'netherite'
+                'stone', 'wood', 'food', 'coal', 'quartz', 'cooper', 'iron', 'gold', 'diamond', 'emerald', 'netherite'
             ];
+        }
+
+        $media = null;
 
         foreach ($ressources as $ressource) {
-            $this->createServerRessource($server, $ressource, null);
+            $this->createServerRessource($server, $ressource, $media);
         }
     }
 
@@ -127,7 +130,7 @@ class ServerService
             'y_max' => 100,
             'z_min' => 0,
             'z_max' => 0,
-            'spawn_generation' => 'random', // random 
+            'spawn_generation' => 'random', // random
         ];
 
         foreach ($configurations as $key => $value) {
@@ -146,46 +149,26 @@ class ServerService
      */
     public function createServerMedia(Server $server)
     {
-        // Exemple de médias par défaut
-        $mediaPaths = [
-            'ressources' => '/storage/example/ressources',
-            'buildings' => '/storage/example/buildings',
-        ];
+        $folder = public_path('server/' . $server->id . '/medias/');
 
-        foreach ($mediaPaths as $name => $path) {
-            $media = ServerMedia::create([
+        if (!file_exists($folder)) {
+            mkdir($folder, 0755, true);
+        }
+
+        foreach (Storage::files('server/default/ressources') as $file) {
+            $info = pathinfo($file);
+            $filename = $info['filename'] . '.' . $info['extension'];
+            Storage::disk('public')->copy($file, $folder . $filename);
+
+            ServerMedia::create([
                 'server_id' => $server->id,
-                'name' => $name,
-                'trans_key' => Str::slug($name),
+                'name' => $filename,
+                'trans_key' => Str::slug($filename),
+                'path' => 'server/' . $server->id . '/medias/' . $filename, // chemin pour le public
             ]);
-
-            // Copier les fichiers vers le nouveau répertoire du serveur
-            $this->copyMediaFiles($path, $server->id, $name);
         }
     }
 
-    /**
-     * Copier les fichiers de médias du chemin source vers le chemin du serveur.
-     *
-     * @param string $sourcePath
-     * @param int $serverId
-     * @param string $mediaType
-     */
-    private function copyMediaFiles(string $sourcePath, int $serverId, string $mediaType)
-    {
-        $destinationPath = storage_path("app/public/server/{$serverId}/{$mediaType}");
-
-        if (!Storage::exists($destinationPath)) {
-            Storage::makeDirectory($destinationPath, 0775, true);
-        }
-
-        $files = Storage::files($sourcePath);
-
-        foreach ($files as $file) {
-            $filename = basename($file);
-            Storage::copy($file, "public/server/{$serverId}/{$mediaType}/{$filename}");
-        }
-    }
 
     /**
      * Créer un nouveau node pour le serveur.

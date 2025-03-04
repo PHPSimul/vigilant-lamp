@@ -14,7 +14,9 @@
                 <div class="mb-3">
                     <label for="entity_type" class="form-label">Type d'Entité</label>
                     <select id="entity_type" name="entity_type" class="form-select" required>
-                        <option value="App\Models\ServerRessource">Ressource</option>
+                        <option value="App\Models\ServerRessource">ServerRessource</option>
+                        <option value="App\Models\ServerBuilding">ServerBuilding</option>
+
                     </select>
                 </div>
 
@@ -23,6 +25,9 @@
                     <select id="entity_id" name="entity_id" class="form-select" required>
                         @foreach($server->serverRessources as $entity)
                             <option value="{{ $entity->id }}" class="entity_option" data-type="App\Models\ServerRessource" data-type-filter="App\Models\ServerRessource">[Ressources] {{ $entity->trans_key }}</option>
+                        @endforeach
+                        @foreach($server->serverBuildings as $entity)
+                            <option value="{{ $entity->id }}" class="entity_option" data-type="App\Models\ServerBuilding" data-type-filter="App\Models\ServerBuilding">[Building] {{ $entity->name }}</option>
                         @endforeach
                     </select>
                 </div>
