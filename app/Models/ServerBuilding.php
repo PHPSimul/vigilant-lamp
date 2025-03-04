@@ -22,4 +22,12 @@ class ServerBuilding extends Model
     public function costs() {
         return $this->morphMany(ServerEntityCost::class, 'entity');
     }
+
+    public function prods() {
+        return $this->morphMany(ServerEntityProduction::class, 'entity');
+    }
+
+    public function storages() {
+        return $this->morphMany(ServerEntityStorage::class, 'entity');
+    }
 }

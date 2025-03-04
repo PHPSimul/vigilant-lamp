@@ -23,6 +23,10 @@
 
     <!-- Coûts par niveau et ressource -->
     <x-building-costs :building="$building" />
+    <br />
+    <x-building-prod :building="$building" />
+    <br />
+    <x-building-storage :building="$building" />
 
     <!-- Bouton Retour -->
     <div class="mt-4">

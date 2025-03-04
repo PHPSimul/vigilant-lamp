@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Models\Server;
 use App\Models\ServerBuilding;
 use App\Models\ServerEntityCost;
+use App\Models\ServerEntityProduction;
+use App\Models\ServerEntityStorage;
 use App\Models\ServerRessource;
 
 class ServerBuildingService
@@ -43,6 +45,36 @@ class ServerBuildingService
             'entity_id' => $building->id,
             'resource_id' => $ressource->id,
             'cost' => $initialCost,
+            'evolution' => $evolution,
+        ]);
+    }
+
+    public function generateProdOfBuilding(ServerBuilding $building, ServerRessource $ressource, int $initialCost, float $evolution) {
+        if ($building->server_id != $ressource->server_id)
+            throw new \Exception("Le serveur de la ressource et du building ne correspondent pas.");
+        $exist = ServerEntityProduction::where('entity_id', $building->id)->where('entity_type', ServerBuilding::class)->where('resource_id', $ressource->id)->get();
+        if ($exist != null && $exist->count() > 0)
+            throw new \Exception("La production pour ce batiment avec cette ressource est deja existant.");
+        ServerEntityProduction::create([
+            'entity_type' => ServerBuilding::class,
+            'entity_id' => $building->id,
+            'resource_id' => $ressource->id,
+            'prod' => $initialCost,
+            'evolution' => $evolution,
+        ]);
+    }
+
+    public function generateStorageOfBuilding(ServerBuilding $building, ServerRessource $ressource, int $initialCost, float $evolution) {
+        if ($building->server_id != $ressource->server_id)
+            throw new \Exception("Le serveur de la ressource et du building ne correspondent pas.");
+        $exist = ServerEntityStorage::where('entity_id', $building->id)->where('entity_type', ServerBuilding::class)->where('resource_id', $ressource->id)->get();
+        if ($exist != null && $exist->count() > 0)
+            throw new \Exception("Le stockage pour ce batiment avec cette ressource est deja existant.");
+        ServerEntityStorage::create([
+            'entity_type' => ServerBuilding::class,
+            'entity_id' => $building->id,
+            'resource_id' => $ressource->id,
+            'storage' => $initialCost,
             'evolution' => $evolution,
         ]);
     }
