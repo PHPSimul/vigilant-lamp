@@ -50,27 +50,22 @@ class ServerAdminBuildingController extends Controller
         ]);
 
         if ($request->min_level > $request->max_level)
-        {
-            dd("erreur 01");
             return redirect()->route('game.servers.admin.buildings.create', ['server' => $server]);
-        }
-        if ($request->min_level > $request->default_level) {
-            dd("erreur 02");
+        if ($request->min_level > $request->default_level)
             return redirect()->route('game.servers.admin.buildings.create', ['server' => $server]);
-        }
         if ($request->max_level < $request->default_level)
-        {
-            dd("erreur 03");
             return redirect()->route('game.servers.admin.buildings.create', ['server' => $server]);
-        }
         try {
             $this->serverBuildingService->createBuilding($server, $request->name, $request->descr, $request->min_level, $request->max_level, $request->default_level);
             return redirect()->route('game.servers.admin.buildings.list', ['server' => $server]);
         }
         catch (\Exception $e) {
-            dd($e);
             return redirect()->route('game.servers.admin.buildings.create', ['server' => $server]);
         }
+    }
+
+    public function view(Server $server, ServerBuilding $building) {
+        return view('servers.admin.buildings.view', ['server' => $server, 'building' => $building]);
     }
 
     public function edit(Server $server, ServerConfiguration $building)

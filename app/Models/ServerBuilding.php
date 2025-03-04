@@ -20,6 +20,6 @@ class ServerBuilding extends Model
     }
 
     public function costs() {
-        return $this->morphedByMany(ServerEntityCost::class, 'entity');
+        return $this->morphMany(ServerEntityCost::class, 'entity');
     }
 }

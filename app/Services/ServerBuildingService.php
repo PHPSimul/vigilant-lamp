@@ -32,7 +32,7 @@ class ServerBuildingService
         ]);
     }
 
-    public function generateCostOfBuilding(ServerBuilding $building, ServerRessource $ressource, int $initialCost, int $evolution) {
+    public function generateCostOfBuilding(ServerBuilding $building, ServerRessource $ressource, int $initialCost, float $evolution) {
         if ($building->server_id != $ressource->server_id)
             throw new \Exception("Le serveur de la ressource et du building ne correspondent pas.");
         $exist = ServerEntityCost::where('entity_id', $building->id)->where('entity_type', ServerBuilding::class)->where('resource_id', $ressource->id)->get();

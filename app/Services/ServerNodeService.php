@@ -5,6 +5,7 @@
 namespace App\Services;
 
 use App\Models\Server;
+use App\Models\ServerBuilding;
 use App\Models\ServerConfiguration;
 use App\Models\ServerNode;
 use App\Models\ServerNodeEntity;
@@ -115,6 +116,26 @@ class ServerNodeService
         }
     }
 
+    public function createNodeEntityBuildings(ServerNode $node, Server $server) {
+        if ($server->id !== $node->server_id)
+            throw new Exception('Le noeud n\'appartient pas au serveur.');
+        if ($server->serverBuildings->count() === 0)
+            throw new Exception('Aucun batiments n\'est disponible pour le serveur.');
+        foreach ($server->serverBuildings as $building) {
+            $exist = ServerNodeEntity::where('server_node_id', $node->id)->where('entity_id', $building->id)->where('entity_type', ServerBuilding::class)->first();
+            if (!$exist) {
+                ServerNodeEntity::create([
+                    'server_node_id' => $node->id,
+                    'entity_id' => $building->id,
+                    'entity_type' => ServerBuilding::class,
+                    'content' => json_encode([
+                        'level' => $building->default_level,
+                    ]),
+                ]);
+            }
+        }
+    }
+
     public function createNodeEntityModel(ServerNode $node, Model $model, string $content) {
         if ($node->server_id !== $model->server_id)
             throw new Exception('Le modèle n\'appartient pas au serveur.');
@@ -133,6 +154,7 @@ class ServerNodeService
 
     public function createNodeEntity(ServerNode $node, Server $server) {
         $this->createNodeEntityRessources($node, $server);
+        $this->createNodeEntityBuildings($node, $server);
     }
 
     public function renameNode(ServerNode $node, string $name): ServerNode

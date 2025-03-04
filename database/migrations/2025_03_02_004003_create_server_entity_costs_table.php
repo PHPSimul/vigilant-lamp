@@ -16,7 +16,7 @@ return new class extends Migration
             $table->morphs('entity');
             $table->unsignedBigInteger('resource_id');
             $table->unsignedBigInteger('cost');
-            $table->unsignedInteger('evolution');
+            $table->float('evolution');
             $table->foreign('resource_id')->references('id')->on('server_ressources');
             $table->timestamps();
         });

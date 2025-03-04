@@ -23,6 +23,7 @@ class ServerObserver
 
     public function created(Server $server)
     {
+        $this->serverService->createServerMedia($server);
         // Créer les médias et traductions par défaut pour chaque serveur
         $this->serverService->createServerConfigurations($server);
         // $this->serverService->createServerMedia($server);
